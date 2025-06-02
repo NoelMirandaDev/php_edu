@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $contentFile = __DIR__ . '/views/loggedIn.php';
 
     } else {
-        $error = 'Was unable to successfully log in. Please try again.';
+        $error = 'Unable to log in. Please try again.';
 
     }
 }
