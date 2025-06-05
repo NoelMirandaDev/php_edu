@@ -4,7 +4,7 @@
 *  in PHP with cURL. To be specific, this uses the GET request method and accesses the resource as 
 *  a whole (all the gists) with the code that is commented, and then I accessed the resource more specifically by adding the id to the
 *  endpoint url.
-*  API documentation for repo could be found here: https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28
+*  API documentation for gists could be found here: https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28
 */
 
 $curlHandle = curl_init();
