@@ -2,7 +2,7 @@
 /* Example of using a different api endpoint, from GitHub's API. This makes an API request
 *  anonymously (I did not authenticate myself), which then returns all public gists. This demonstrates accessing a RESTful API
 *  in PHP with cURL. To be specific, this uses the GET request method and accesses the resource as 
-*  a whole (all the gists) with code that is commented, and then I access the resource more specifically by adding the id to the
+*  a whole (all the gists) with the code that is commented, and then I accessed the resource more specifically by adding the id to the
 *  endpoint url.
 *  API documentation for repo could be found here: https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28
 */
