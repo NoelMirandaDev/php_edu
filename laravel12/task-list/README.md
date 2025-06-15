@@ -9,7 +9,7 @@ This is a simple task management app built with Laravel. The goal of this projec
 To run the project locally, follow these steps:  
 
 1. Clone the repository:  
-git clone
+git clone  
 cd task-list  
 
 2. Install PHP dependencies:  
