@@ -1,6 +1,9 @@
-<h1>The list of tasks</h1>
+@extends('layouts.app')
 
-<div>
+@section('title', 'The List of Tasks')
+
+@section('content')
+
     @forelse ($tasks as $task)
         <div>
             <a href="{{ route('tasks.show', ['id' => $task->id]) }}">{{ $task->title }}</a>
@@ -8,4 +11,5 @@
     @empty
     <p>There are no Tasks!</p>
     @endforelse
-</div>
+
+@endsection
