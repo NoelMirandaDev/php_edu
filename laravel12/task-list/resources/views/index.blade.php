@@ -1,5 +1,11 @@
-@if (!empty($name))
-<div>Hello {{ $name }}, I am a blade template!</div>
-@else
-<div>Hello stranger, I am a blade template!</div>
-@endif
+<h1>The list of tasks</h1>
+
+<div>
+    @forelse ($tasks as $task)
+        <div>
+            <a href="{{ route('tasks.show', ['id' => $task->id]) }}">{{ $task->title }}</a>
+        </div>
+    @empty
+    <p>There are no Tasks!</p>
+    @endforelse
+</div>
