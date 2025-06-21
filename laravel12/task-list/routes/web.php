@@ -11,8 +11,8 @@ Route::get('/', function () {
 
 Route::get('/tasks', function ()  {
     return view('index',
-  [
-         'tasks' => TaskModel::latest()->get(),
+        [
+            'tasks' => TaskModel::latest()->get(),
         ]
     );
 })->name('tasks.index');
@@ -22,19 +22,19 @@ Route::view('/tasks/create', 'create')
 
 Route::get('/tasks/{id}', function ($id) {
     return view('show',
-    [
-           'task' => TaskModel::findOrFail($id),
-          ]
+        [
+            'task' => TaskModel::findOrFail($id),
+        ]
     );
 })->name('tasks.show');
 
 Route::post('/tasks', function (Request $request) {
     $data = $request->validate(
-    [
+        [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'long_description' => 'required|string',
-            ]
+        ]
     );
 
     $task = new TaskModel;
@@ -45,9 +45,9 @@ Route::post('/tasks', function (Request $request) {
     $task->save();
 
     return redirect()->route('tasks.show',
-    [
-                 'id' => $task->id,
-                ]
+        [
+            'id' => $task->id,
+        ]
     );
 })->name('tasks.store');
 
