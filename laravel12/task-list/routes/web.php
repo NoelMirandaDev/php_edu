@@ -10,23 +10,45 @@ Route::get('/', function () {
 });
 
 Route::get('/tasks', function ()  {
-    return view('index', [
-        'tasks' => TaskModel::latest()->get(),
-    ]);
+    return view('index',
+  [
+         'tasks' => TaskModel::latest()->get(),
+        ]
+    );
 })->name('tasks.index');
 
 Route::view('/tasks/create', 'create')
 ->name('tasks.create');
 
 Route::get('/tasks/{id}', function ($id) {
-    return view('show',[
-            'task' => TaskModel::findOrFail($id),
+    return view('show',
+    [
+           'task' => TaskModel::findOrFail($id),
           ]
-);
+    );
 })->name('tasks.show');
 
 Route::post('/tasks', function (Request $request) {
-    dd($request->all());
+    $data = $request->validate(
+    [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'long_description' => 'required|string',
+            ]
+    );
+
+    $task = new TaskModel;
+    $task->title = $data['title'];
+    $task->description = $data['description'];
+    $task->long_description = $data['long_description'];
+
+    $task->save();
+
+    return redirect()->route('tasks.show',
+    [
+                 'id' => $task->id,
+                ]
+    );
 })->name('tasks.store');
 
 // Route::get('/xxx', function () {
