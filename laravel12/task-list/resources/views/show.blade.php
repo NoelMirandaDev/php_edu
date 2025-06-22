@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
+@section('styles')
+    <style>
+        .success-message {
+            color: green;
+        }
+    </style>
+@endsection
+
 @section('title', $task->title)
 
 @section('content')
+
     <p>{{ $task->description }}</p>
 
     @if ($task->long_description)
