@@ -37,14 +37,6 @@ Route::get('/tasks/{task}', function (TaskModel $task) {
 })->name('tasks.show');
 
 Route::post('/tasks', function (TaskRequest $request) {
-    // $data = $request->validated();
-
-    // $task = new TaskModel;
-    // $task->title = $data['title'];
-    // $task->description = $data['description'];
-    // $task->long_description = $data['long_description'];
-
-    // $task->save();
 
     $task = TaskModel::create($request->validated());
 
@@ -56,13 +48,6 @@ Route::post('/tasks', function (TaskRequest $request) {
 })->name('tasks.store');
 
 Route::put('/tasks/{task}', function (TaskModel $task, TaskRequest $request) {
-    // $data = $request->validated();
-
-    // $task->title = $data['title'];
-    // $task->description = $data['description'];
-    // $task->long_description = $data['long_description'];
-
-    // $task->save();
 
     $task->update($request->validated());
 
@@ -72,18 +57,6 @@ Route::put('/tasks/{task}', function (TaskModel $task, TaskRequest $request) {
         ]
     )->with('success', 'Task updated successfully!');
 })->name('tasks.update');
-
-// Route::get('/xxx', function () {
-//     return 'Hello World';
-// }) -> name('hello');
-
-// Route::get('/hallo', function () {
-//     return redirect()->route('hello');
-// });
-
-// Route::get('/greet/{name}', fn($name) =>
-//     "Hello {$name}!"
-// )->name('greeting');
 
 // Route::get('/not-found', function () {
 //     return 'Sorry, this page does not exist';
