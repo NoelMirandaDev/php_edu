@@ -14,4 +14,9 @@ class Task extends Model
 
     // This allows all fields to be fillable except the ones listed here but not recommended when adding new fields (security concerns)
     //protected $guarded = ['secret',];
+
+    public function toggleCompleted(): void {
+        $this->completed = !$this->completed;
+        $this->save();
+    }
 }

@@ -42,7 +42,7 @@ Route::post('/tasks', function (TaskRequest $request) {
 
     return redirect()->route('tasks.show',
         [
-            'task' => $task->id,
+            'task' => $task,
         ]
     )->with('success', 'Task created successfully!');
 })->name('tasks.store');
@@ -53,7 +53,7 @@ Route::put('/tasks/{task}', function (TaskModel $task, TaskRequest $request) {
 
     return redirect()->route('tasks.show',
         [
-            'task' => $task->id,
+            'task' => $task,
         ]
     )->with('success', 'Task updated successfully!');
 })->name('tasks.update');
@@ -65,8 +65,8 @@ Route::delete('tasks/{task}', function (TaskModel $task) {
         ->with('success','Task deleted successfully!');
 })->name('tasks.destroy');
 
-// Route::get('/not-found', function () {
-//     return 'Sorry, this page does not exist';
-// })->name('404');
+Route::put('/tasks/{task}/toggle-completed', function (TaskModel $task) {
+    $task->toggleCompleted();
 
-// Route::fallback(fn() => redirect()->route('404'));
+    return redirect()->back()->with('success', 'Task updated successfully!');
+})->name('tasks.toggle-completed');
