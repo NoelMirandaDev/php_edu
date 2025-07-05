@@ -58,6 +58,13 @@ Route::put('/tasks/{task}', function (TaskModel $task, TaskRequest $request) {
     )->with('success', 'Task updated successfully!');
 })->name('tasks.update');
 
+Route::delete('tasks/{task}', function (TaskModel $task) {
+    $task->delete();
+
+    return redirect()->route('tasks.index')
+        ->with('success','Task deleted successfully!');
+})->name('tasks.destroy');
+
 // Route::get('/not-found', function () {
 //     return 'Sorry, this page does not exist';
 // })->name('404');

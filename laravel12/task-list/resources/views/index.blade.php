@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('styles')
+    <style>
+        .success-message {
+            color: green;
+        }
+    </style>
+@endsection
+
 @section('title', 'The List of Tasks')
 
 @section('content')
@@ -11,5 +19,4 @@
     @empty
     <p>There are no Tasks!</p>
     @endforelse
-
 @endsection
