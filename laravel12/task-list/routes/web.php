@@ -12,7 +12,7 @@ Route::get('/', function () {
 Route::get('/tasks', function ()  {
     return view('index',
         [
-            'tasks' => TaskModel::latest()->get(),
+            'tasks' => TaskModel::latest()->paginate(10),
         ]
     );
 })->name('tasks.index');
