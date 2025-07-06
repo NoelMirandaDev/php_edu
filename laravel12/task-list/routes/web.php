@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types= 1);
+
 use App\Http\Requests\TaskRequest;
 use Illuminate\Support\Facades\Route;
 use App\Models\Task as TaskModel;
-use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return redirect()->route('tasks.index');
