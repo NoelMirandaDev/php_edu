@@ -30,9 +30,10 @@ class ReviewFactory extends Factory
     public function good()
     {
         return $this->state(
-            [
-                'rating' => fake()->numberBetween(4,5),
-            ]
+            fn (array $attributes) =>
+                [
+                    'rating' => fake()->numberBetween(4, 5),
+                ]
         );
     }
 
@@ -48,9 +49,10 @@ class ReviewFactory extends Factory
     public function bad()
     {
         return $this->state(
-            [
-                'rating' => fake()->numberBetween(1,2)
-            ]
+            fn (array $attributes) =>
+                [
+                    'rating' => fake()->numberBetween(1, 2)
+                ]
         );
     }
 }
