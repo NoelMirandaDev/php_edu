@@ -27,8 +27,7 @@ class Book extends Model
             [
                 'reviews' => fn (Builder $q) => $this->dateRangeFilter($q, $from, $to)
             ]
-        )
-            ->orderBy('reviews_count', 'desc');
+        )->orderBy('reviews_count', 'desc');
     }
 
     public function scopeUnpopular(Builder $query, $from = null, $to = null): Builder|QueryBuilder
@@ -37,8 +36,7 @@ class Book extends Model
             [
                 'reviews' => fn (Builder $q) => $this->dateRangeFilter($q, $from, $to)
             ]
-        )
-            ->orderBy('reviews_count', 'asc');
+        )->orderBy('reviews_count', 'asc');
     }
 
     public function scopeHighestRated(Builder $query, $from = null, $to = null): Builder|QueryBuilder
@@ -48,8 +46,7 @@ class Book extends Model
                 'reviews' => fn (Builder $q) => $this->dateRangeFilter($q, $from, $to)
             ],
             'rating'
-        )
-            ->orderBy('reviews_avg_rating', 'desc');
+        )->orderBy('reviews_avg_rating', 'desc');
     }
 
     public function scopeLowestRated(Builder $query, $from = null, $to = null): Builder|QueryBuilder
@@ -59,8 +56,7 @@ class Book extends Model
                 'reviews' => fn(Builder $q) => $this->dateRangeFilter($q, $from, $to)
             ],
             'rating'
-        )
-            ->orderBy('reviews_avg_rating', 'asc');
+        )->orderBy('reviews_avg_rating', 'asc');
     }
 
     public function scopeMinReviews(Builder $query, int $minReviews): Builder|QueryBuilder
