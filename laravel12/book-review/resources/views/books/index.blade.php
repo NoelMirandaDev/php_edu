@@ -6,6 +6,7 @@
     <form method="GET" action="{{ route('books.index') }}" class="mb-4 flex items-center space-x-2">
         <input type="text" name="title" placeholder="Search by title"
             value="{{ request('title') }}" class="input h-10" />
+        <input type="hidden" name="filter" value="{{ request('filter') }}" />
         <button type="submit" class="btn h-10">Search</button>
         <a href="{{ route('books.index') }}" class="btn h-10">Clear</a>
     </form>
@@ -21,8 +22,10 @@
             ];
         @endphp
 
+
         @foreach ($filters as $key => $label)
-            <a href="#" class="filter-item">
+            <a href="{{ route('books.index', [...request()->query(), 'filter' => $key]) }}"
+                class="{{ request()->string('filter')->toString() === $key ? 'filter-item-active' : 'filter-item' }}">
                 {{ $label }}
             </a>
         @endforeach
