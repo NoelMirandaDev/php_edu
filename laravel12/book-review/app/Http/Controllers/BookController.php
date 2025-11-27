@@ -32,7 +32,7 @@ class BookController extends Controller
         $cacheKey = "books:{$filter}:{$title}:page_{$page}";
         $books = cache()->remember(
             $cacheKey,
-            3600,
+            60,
             fn() => $books->paginate(10)->withQueryString()
         );
 
@@ -76,10 +76,9 @@ class BookController extends Controller
         );
 
         $page = request()->input('page', 1);
-        $reviewsCacheKey = "book:{$id}:reviews:page_{$page}";
 
         $reviews = cache()->remember(
-            $reviewsCacheKey,
+            "{$bookCacheKey}:reviews:page_{$page}",
             3600,
             fn () => $book->reviews()
                 ->latest()

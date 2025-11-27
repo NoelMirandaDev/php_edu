@@ -19,13 +19,34 @@ class Review extends Model
     protected static function booted()
     {
         static::updated(
-            fn(Review $review) => cache()->forget('book:' . $review->book_id)
+            function (Review $review) {
+                $cacheKeyPrefix = "book:{$review->book_id}";
+
+                cache()->forget($cacheKeyPrefix);
+                cache()->forget("{$cacheKeyPrefix}:reviews:page_1");
+                cache()->forget("{$cacheKeyPrefix}:reviews:page_2");
+                cache()->forget("{$cacheKeyPrefix}:reviews:page_3");
+            }
         );
         static::deleted(
-            fn(Review $review) => cache()->forget('book:' . $review->book_id)
+            function (Review $review) {
+                $cacheKeyPrefix = "book:{$review->book_id}";
+
+                cache()->forget($cacheKeyPrefix);
+                cache()->forget("{$cacheKeyPrefix}:reviews:page_1");
+                cache()->forget("{$cacheKeyPrefix}:reviews:page_2");
+                cache()->forget("{$cacheKeyPrefix}:reviews:page_3");
+            }
         );
         static::created(
-            fn(Review $review) => cache()->forget('book:' . $review->book_id)
+            function (Review $review) {
+                $cacheKeyPrefix = "book:{$review->book_id}";
+
+                cache()->forget($cacheKeyPrefix);
+                cache()->forget("{$cacheKeyPrefix}:reviews:page_1");
+                cache()->forget("{$cacheKeyPrefix}:reviews:page_2");
+                cache()->forget("{$cacheKeyPrefix}:reviews:page_3");
+            }
         );
     }
 }
