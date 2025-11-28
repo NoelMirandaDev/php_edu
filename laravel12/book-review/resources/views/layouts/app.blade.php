@@ -65,6 +65,16 @@
 
 <body class="container mx-auto mt-10 mb-10 max-w-3xl">
   @yield('content')
+
+    <footer class="mt-10 pt-5 border-t border-slate-200">
+        <div class="flex justify-center">
+            <x-logo class="h-40 opacity-90" />
+        </div>
+
+        <p class="text-center text-sm text-slate-500 mt-2">
+            © {{ date('Y') }} Noel Yobani Miranda. All rights reserved.
+        </p>
+    </footer>
 </body>
 
 </html>
