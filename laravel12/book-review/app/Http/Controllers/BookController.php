@@ -33,7 +33,7 @@ class BookController extends Controller
         $books = cache()->remember(
             $cacheKey,
             60,
-            fn() => $books->paginate(10)->withQueryString()
+            fn() => $books->paginate(5)->withQueryString()
         );
 
         return view(
