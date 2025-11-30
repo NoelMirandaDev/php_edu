@@ -24,7 +24,7 @@
 
 
         @foreach ($filters as $key => $label)
-            <a href="{{ route('books.index', [...request()->query(), 'filter' => $key]) }}"
+            <a href="{{ route('books.index', ['title' => request()->query('title'), 'filter' => $key]) }}"
                 class="{{ request()->string('filter')->toString() === $key ? 'filter-item-active' : 'filter-item' }}">
                 {{ $label }}
             </a>
