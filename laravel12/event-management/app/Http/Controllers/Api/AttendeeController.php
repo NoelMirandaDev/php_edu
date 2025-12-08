@@ -31,11 +31,6 @@ class AttendeeController extends Controller
         return AttendeeResource::make($attendee);
     }
 
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
     public function destroy(Event $event, Attendee $attendee)
     {
         $attendee->delete();
