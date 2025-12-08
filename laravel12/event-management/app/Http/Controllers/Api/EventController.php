@@ -16,10 +16,6 @@ class EventController extends Controller
     {
         return EventResource::collection(Event::with('user')->get());
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $event = Event::create([
@@ -35,17 +31,11 @@ class EventController extends Controller
         return EventResource::make($event);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Event $event)
     {
         return EventResource::make($event->load('user', 'attendees'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Event $event)
     {
         $event->update(
@@ -60,9 +50,6 @@ class EventController extends Controller
         return EventResource::make($event);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Event $event)
     {
         $event->delete();
