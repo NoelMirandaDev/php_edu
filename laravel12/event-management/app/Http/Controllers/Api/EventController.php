@@ -9,15 +9,29 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
+    private const ALLOWED_RELATIONS = [
+        'user',
+        'attendees',
+        'attendees.user',
+    ];
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return EventResource::collection(
-            Event::with('user')->paginate()
-        );
+        $query = Event::query();
+
+        foreach (self::ALLOWED_RELATIONS as $relation) {
+            $query->when(
+                $this->shouldIncludeRelation($request, $relation),
+                fn ($q) => $q->with($relation)
+            );
+        }
+
+        return EventResource::collection($query->latest()->paginate());
     }
+
     public function store(Request $request)
     {
         $event = Event::create([
@@ -57,5 +71,18 @@ class EventController extends Controller
         $event->delete();
 
         return response()->noContent();
+    }
+
+    protected function shouldIncludeRelation(Request $request, string $relation): bool
+    {
+        $include = $request->query('include');
+
+        if (!$include) {
+            return false;
+        }
+
+        $relations = array_map('trim', explode(',', $include));
+
+        return in_array($relation, $relations);
     }
 }
