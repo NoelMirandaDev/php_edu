@@ -28,7 +28,9 @@ class EventController extends Controller
             static::RELATIONS
         );
 
-        return EventResource::collection($query->latest()->paginate());
+        return EventResource::collection(
+            $query->latest()->paginate()
+        );
     }
 
     public function store(Request $request)
@@ -40,15 +42,19 @@ class EventController extends Controller
                 'start_time' => 'required|date',
                 'end_time' => 'required|date|after:start_time',
             ]),
-            'user_id' => 1
+            'user_id' => $request->user()->id,
         ]);
 
-        return EventResource::make($this->loadRelationships($event, static::RELATIONS));
+        return EventResource::make(
+            $this->loadRelationships($event, static::RELATIONS)
+        );
     }
 
     public function show(Event $event)
     {
-        return EventResource::make($this->loadRelationships($event, static::RELATIONS));
+        return EventResource::make(
+            $this->loadRelationships($event, static::RELATIONS)
+        );
     }
 
     public function update(Request $request, Event $event)
@@ -62,7 +68,9 @@ class EventController extends Controller
             ])
         );
 
-        return EventResource::make($this->loadRelationships($event, static::RELATIONS));
+        return EventResource::make(
+            $this->loadRelationships($event, static::RELATIONS)
+        );
     }
 
     public function destroy(Event $event)
