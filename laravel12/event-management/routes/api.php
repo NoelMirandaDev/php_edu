@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Event;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -21,7 +22,7 @@ Route::apiResource('events', EventController::class)
 // Protected routes for events
 Route::apiResource('events', EventController::class)
     ->middleware('auth:sanctum')
-    ->except(['index', 'show']);
+    ->only(['store', 'update', 'destroy']);
 
 // Public routes for attendees
 Route::apiResource('events.attendees', AttendeeController::class)
