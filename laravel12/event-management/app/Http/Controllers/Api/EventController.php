@@ -8,7 +8,6 @@ use App\Http\Traits\CanLoadRelationships;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use App\Policies\EventPolicy;
 
 class EventController extends Controller
 {
@@ -20,9 +19,6 @@ class EventController extends Controller
         'attendees.user',
     ];
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $query = $this->loadRelationships(
@@ -37,6 +33,8 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+        Gate::authorize('create', Event::class);
+
         $event = Event::create([
             ...$request->validate([
                 'name' => 'required|string|max:255',
@@ -61,11 +59,7 @@ class EventController extends Controller
 
     public function update(Request $request, Event $event)
     {
-        // if (Gate::denies('update-event', $event)) {
-        //     abort(403, 'You are not authorized to update this event.');
-        // }
-
-        Gate::authorize('update-event', $event);
+        Gate::authorize('update', $event);
 
         $event->update(
             $request->validate([
@@ -83,6 +77,8 @@ class EventController extends Controller
 
     public function destroy(Event $event)
     {
+        Gate::authorize('delete', $event);
+        
         $event->delete();
 
         return response()->noContent();
