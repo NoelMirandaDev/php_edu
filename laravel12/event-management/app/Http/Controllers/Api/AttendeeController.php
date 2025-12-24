@@ -33,7 +33,7 @@ class AttendeeController extends Controller
     public function store(Request $request, Event $event)
     {
         Gate::authorize('create', Attendee::class);
-        
+
         $attendee = $this->loadRelationships(
             $event->attendees()->create([
                 'user_id' => $request->user()->id,
@@ -53,7 +53,7 @@ class AttendeeController extends Controller
 
     public function destroy(Event $event, Attendee $attendee)
     {
-        Gate::authorize('delete', [$event, $attendee]);
+        Gate::authorize('delete', [$attendee, $event]);
 
         $attendee->delete();
 
