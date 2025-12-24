@@ -44,7 +44,7 @@ class AttendeePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Event $event, Attendee $attendee): bool
+    public function delete(User $user, Attendee $attendee, Event $event): bool
     {
         return $user->id === $attendee->user_id
             || $user->id === $event->user_id;
@@ -61,7 +61,7 @@ class AttendeePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Event $event, Attendee $attendee): bool
+    public function forceDelete(User $user, Attendee $attendee, Event $event): bool
     {
         return false;
     }
