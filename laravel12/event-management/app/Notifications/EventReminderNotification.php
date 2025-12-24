@@ -38,6 +38,7 @@ class EventReminderNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
+            ->subject('Event Reminder: ' . $this->event->name)
             ->line('Reminder: You have an upcoming event!')
             ->action('View Event', route('events.show', $this->event->id))
             ->line(
