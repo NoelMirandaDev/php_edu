@@ -10,6 +10,25 @@ class CreatePoll extends Component
     public $title = "";
     public $options = ['First'];
 
+    protected function rules()
+    {
+        return [
+            'title' => 'required|min:3|max:255',
+            'options' => 'required|array|min:1|max:10',
+            'options.*' => 'required|min:1|max:255'
+        ];
+    }
+
+    protected function messages()
+    {
+        return [
+            'options.required' => 'You must add at least one option.',
+            'options.*.required' => 'The option can\'t be empty.',
+            'options.*.min' => 'Each option must be at least :min characters.',
+            'options.*.max' => 'Each option may not be greater than :max characters.',
+        ];
+    }
+
     public function render()
     {
         return view('livewire.create-poll');
@@ -26,15 +45,22 @@ class CreatePoll extends Component
         $this->options = array_values($this->options);
     }
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function createPoll()
     {
+        $this->validate();
+
         Poll::create([
             'title' => $this->title,
         ])->options()->createMany(
-                collect($this->options)
-                    ->map(fn($option) => ['name' => $option])
-                    ->all()
-            );
+            collect($this->options)
+                ->map(fn($option) => ['name' => $option])
+                ->all()
+        );
 
         $this->reset(['title', 'options']);
     }
