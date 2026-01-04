@@ -43,6 +43,7 @@
         @livewire('polls')
     </div>
 
+    @include('partials.logo')
 
     @livewireScripts
 </body>
