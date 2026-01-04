@@ -3,6 +3,6 @@
         class="w-48 h-auto mx-auto mt-12" />
 
     <div class="text-center text-sm text-gray-500 mt-2">
-        &copy; {{ date('Y') }} Noel Miranda. All rights reserved.
+        &copy; {{ date('Y') }} Noel Yobani Miranda. All rights reserved.
     </div>
 </div>
