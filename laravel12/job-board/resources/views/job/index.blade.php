@@ -1,7 +1,9 @@
 <x-layout>
     @forelse ($jobs as $job)
-        <div>{{ $job->title }}</div>
+        <x-card class="mb-4">
+            {{ $job->title }}
+        </x-card>
     @empty
-        <div>No jobs found.</div>
+        <div class="text-2xl text-bold text-slate-700">No jobs found.</div>
     @endforelse
 </x-layout>
