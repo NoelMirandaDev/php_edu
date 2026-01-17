@@ -16,8 +16,16 @@ class JobController extends Controller
 
         $jobs->when(
             request('search'),
-            fn($query, $search) => $query->where('title', 'like', "%{$search}%")
-                ->orWhere('description', 'like', "%{$search}%")
+            fn($query, $search) => $query->where(function ($query) use ($search) {
+                $query->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+            })
+        )->when(
+            request('min_salary'),
+            fn($query, $minSalary) => $query->where('salary', '>=', $minSalary)
+        )->when(
+            request('max_salary'),
+            fn($query, $maxSalary) => $query->where('salary', '<=', $maxSalary)
         );
 
         return view('job.index', [
