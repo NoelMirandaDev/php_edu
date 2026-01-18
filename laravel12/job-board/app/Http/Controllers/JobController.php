@@ -26,6 +26,12 @@ class JobController extends Controller
         )->when(
             request('max_salary'),
             fn($query, $maxSalary) => $query->where('salary', '<=', $maxSalary)
+        )->when(
+            request('experience'),
+            fn($query, $experience) =>
+                in_array($experience, Job::EXPERIENCE, true)
+                ? $query->where('experience', $experience)
+                : $query
         );
 
         return view('job.index', [
