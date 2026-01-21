@@ -18,14 +18,15 @@
                 <div>
                     <div class="mb-1 font-semibold">Experience</div>
 
-                    <x-radio-group name="experience"
-                    :options="\App\Models\Job::EXPERIENCE" />
+                    <x-radio-group name="experience" :options="array_combine(
+                        array_map('ucfirst', \App\Models\Job::EXPERIENCE),
+                        \App\Models\Job::EXPERIENCE,
+                    )" />
                 </div>
                 <div>
                     <div class="mb-1 font-semibold">Category</div>
 
-                    <x-radio-group name="category"
-                    :options="\App\Models\Job::CATEGORY" />
+                    <x-radio-group name="category" :options="\App\Models\Job::CATEGORY" />
                 </div>
             </div>
 
