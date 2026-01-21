@@ -29,8 +29,14 @@ class JobController extends Controller
         )->when(
             request('experience'),
             fn($query, $experience) =>
-                in_array($experience, Job::EXPERIENCE, true)
+            in_array($experience, Job::EXPERIENCE, true)
                 ? $query->where('experience', $experience)
+                : $query
+        )->when(
+            request('category'),
+            fn($query, $category) =>
+            in_array($category, Job::CATEGORY, true)
+                ? $query->where('category', $category)
                 : $query
         );
 
