@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 
 class Job extends Model
 {
@@ -19,4 +21,34 @@ class Job extends Model
         'Sales',
         'Marketing',
     ];
+
+    #[Scope]
+    protected function filter(Builder $query, array $filters): Builder
+    {
+        return $query->when(
+            $filters['search'] ?? null,
+            fn($query, $search) => $query->where(function ($query) use ($search) {
+                $query->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+            })
+        )->when(
+            $filters['min_salary'] ?? null,
+            fn($query, $minSalary) => $query->where('salary', '>=', $minSalary)
+        )->when(
+            $filters['max_salary'] ?? null,
+            fn($query, $maxSalary) => $query->where('salary', '<=', $maxSalary)
+        )->when(
+            $filters['experience'] ?? null,
+            fn($query, $experience) =>
+            in_array($experience, self::EXPERIENCE, true)
+                ? $query->where('experience', $experience)
+                : $query
+        )->when(
+            $filters['category'] ?? null,
+            fn($query, $category) =>
+            in_array($category, self::CATEGORY, true)
+                ? $query->where('category', $category)
+                : $query
+        );
+    }
 }
