@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Job extends Model
 {
@@ -21,6 +22,11 @@ class Job extends Model
         'Sales',
         'Marketing',
     ];
+
+    public function employer(): BelongsTo
+    {
+        return $this->belongsTo(Employer::class);
+    }
 
     #[Scope]
     protected function filter(Builder $query, array $filters): Builder
