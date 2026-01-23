@@ -13,7 +13,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('job_listings', function (Blueprint $table) {
-            $table->foreignIdFor(Employer::class)->constrained();
+            $table->foreignIdFor(Employer::class)
+                ->constrained()
+                ->cascadeOnDelete();
         });
     }
 
@@ -23,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('job_listings', function (Blueprint $table) {
-            $table->dropForeignIdFor(Employer::class);
+            $table->dropConstrainedForeignIdFor(Employer::class);
         });
     }
 };
