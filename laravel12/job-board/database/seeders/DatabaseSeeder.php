@@ -17,6 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::factory()->create([
+            'name' => 'Noel Miranda',
+            'email' => 'noel@miranda.com',
+        ]);
+        
         User::factory(300)->create();
 
         User::inRandomOrder()->limit(20)->get()->each(function ($user) {
